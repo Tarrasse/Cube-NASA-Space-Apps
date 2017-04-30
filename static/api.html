@@ -18,9 +18,7 @@
       }
     </style>
     <script>
-
-
-var map,infowindow,mylat,mylng;
+ var map,infowindow,mylat,mylng;
 
       function getLocation() {
         console.log("get location");
@@ -65,26 +63,26 @@ var map,infowindow,mylat,mylng;
       function callback(results, status) {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
           for (var i = 0; i < results.length; i++) {
-            console.log(results[i]);
- 
+            // console.log(results[i]);
             createMarker(results[i]);
           }
         }
       }
- 
+
       function createMarker(place) {
         var placeLoc = place.geometry.location;
         var marker = new google.maps.Marker({
           map: map,
           position: place.geometry.location
         });
-        var lat = marker.getPosition().lat();
-        var lng = marker.getPosition().lng();
- 
+
         google.maps.event.addListener(marker, 'click', function() {
+          var lat = marker.getPosition().lat();
+          var lng = marker.getPosition().lng();
+          console.log("marker position:"+lat + ", " + lng);
           //infowindow.setContent(place.name);
-          console.log(place.geometry.location); 
-          content = "<div>"+"</div>"+"<div><img width='254' height='355' src='http://maps.googleapis.com/maps/api/streetview?size=640x480&location="+lat+","+lng+"&fov=120&heading=235&pitch=10&sensor=false'</div>" ;
+          //console.log(place.geometry.location);
+          content = "<div>"+"</div>"+"<div id='pic'><img width='254' height='355' src='http://maps.googleapis.com/maps/api/streetview?size=640x480&location="+lat+","+lng+"&fov=120&heading=235&pitch=10&sensor=false'</div>" ;
           infowindow.setContent(content)
           infowindow.open(map, this);
         });
