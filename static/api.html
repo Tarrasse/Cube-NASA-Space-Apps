@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Place searches</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <script>
+
+
+var map,infowindow,mylat,mylng;
+
+      function getLocation() {
+        console.log("get location");
+        if (navigator.geolocation)
+        {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        }
+        else
+          alert("Geolocation is not supported by this browser.");
+      }
+
+      function showPosition(position) {
+        console.log("showPosition");
+        mylat = position.coords.latitude;
+        mylng = position.coords.longitude;
+        map.setCenter(new google.maps.LatLng(mylat, mylng));
+        console.log(mylat);
+        mapContent();
+      }
+
+      function initMap() {
+        console.log("initMap");
+        getLocation();
+        map = new google.maps.Map(document.getElementById('map'), {
+          // center: pyrmont,
+          zoom: 15
+        });
+      }
+
+      function mapContent(){
+        console.log("mapContent");
+        infowindow = new google.maps.InfoWindow();
+        var service = new google.maps.places.PlacesService(map);
+        var pyrmont = {lat: mylat, lng: mylng};
+        service.nearbySearch({
+          location: pyrmont,
+          radius: 500,
+          type: ['stores']
+        }, callback);
+      }
+
+      function callback(results, status) {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          for (var i = 0; i < results.length; i++) {
+            console.log(results[i]);
+ 
+            createMarker(results[i]);
+          }
+        }
+      }
+ 
+      function createMarker(place) {
+        var placeLoc = place.geometry.location;
+        var marker = new google.maps.Marker({
+          map: map,
+          position: place.geometry.location
+        });
+        var lat = marker.getPosition().lat();
+        var lng = marker.getPosition().lng();
+ 
+        google.maps.event.addListener(marker, 'click', function() {
+          //infowindow.setContent(place.name);
+          console.log(place.geometry.location); 
+          content = "<div>"+"</div>"+"<div><img width='254' height='355' src='http://maps.googleapis.com/maps/api/streetview?size=640x480&location="+lat+","+lng+"&fov=120&heading=235&pitch=10&sensor=false'</div>" ;
+          infowindow.setContent(content)
+          infowindow.open(map, this);
+        });
+      }
+      function createPhotoMarker(place) {
+        var photos = place.photos;
+        if (!photos) {
+        }
+ 
+      var marker = new google.maps.Marker({
+        map: map,
+        position: place.geometry.location,
+        title: place.name,
+        icon: photos[0].getUrl({'maxWidth': 35, 'maxHeight': 35})
+  });
+}
+    </script>
+  </head>
+  <body>
+    <div id="map">
+      
+    </div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUgbqVR94dkpB7jKVLAWCl4ni3P0ESrJw&libraries=places&callback=initMap" async defer>
+    </script>
+  </body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/static/css/font-awesome.min.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab:600,700italic' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="css/stylesheet.css">
+
+		<title>
+			cupe report
+		</title>
+    <style>
+        @charset "utf-8";
+        /* CSS Document */
+        ::-ms-selection{color:#FFF;  background-color:#999;}
+        ::-moz-selection{color:#FFF;  background-color:#999;}
+        ::-webkit-selection{color:#FFF;	background-color:#999;}
+        ::selection{color:#FFF; background-color:#999;}
+        ::-webkit-scrollbar { background:#fff; width: 7px; height: 7px;}
+        ::-webkit-scrollbar-thumb {-webkit-border-radius: 10px; background-color:#666;}
+        ::scrollbar { background:#fff; width: 7px; height: 7px;}
+        ::scrollbar-thumb {-webkit-border-radius: 10px; background-color:#666; border-radius: 10px;}
+        ::-moz-scrollbar { background:#fff; width: 7px; height: 7px;}\
+        ::-moz-scrollbar-thumb {-webkit-border-radius: 10px; background-color:#666; border-radius: 10px;}
+        body{direction:ltr; font-family:Tahoma, Geneva, sans-serif; background:#f3f3f3; margin:0px; padding:0;}
+
+        #mlpa{float:left; width:50%; background-color:#ff0; height:500px;}
+        #mlpaimg{width:100%; height: 100%}
+        #mlpapara{z-index:3; font-size:20px; position: absolute; top:5%;color:#f3f3f3; margin: auto;}
+        #mlpr{float:right;width:50%;background-color:#f00;height:500px;}
+        #mlprimg{width:100%; height:100%;}
+        #mlprpara{z-index:3; font-size:20px; position: absolute; top:5%; color:#f3f3f3; margin: auto;}
+        #mlf{background-color:#353535; cursor:pointer; width:99%; height:20%; position:absolute; bottom:0; transition:1s; -webkit-transition:1s;            -ms-transition:1s;}
+        #mlpre{color:#f3f3f3; font-size:40px; text-align: center; transition:1s; -webkit-transition:1s; -ms-transition:1s;}
+        #mlfres{display:none; background-color:#f3f3f3; width:100%; height:100%; position: absolute; top:0; z-index:11; opacity:0.7;}
+        .prepara{font-size:25px; color:#353535;text-align:center; margin-top:100px;}
+        #closemlfres{position: absolute; top:2%; right:2%; cursor:pointer;}
+        #mlfresclose{font-size:45px; color:#353535;}
+        #mlfresclose:hover{color:#999;}
+        #mlf:hover{background-color:#f3f3f3;}
+        #mlf:hover #mlpre{color:#353535;}
+    </style>
+    </head>
+  <body>
+    <div>
+        <div id="mlpa">
+            <img src="{{past}}" id="mlpaimg"/>
+            <p id="mlpapara">green percentage:{{ before }}%</p>
+        </div>
+        <div id="mlpr">
+            <img src="{{present}}" id="mlprimg"/>
+            <p id="mlprpara">green percentage:{{ after }}%</p>
+        </div>
+        <div id="mlf">
+            <p id="mlpre">Predict</p>
+        </div>
+
+
+
+
+    </div>
+    <div id="mlfres">
+            <p class="prepara">by the year 2030 the green areas will be {{ 100 - predict }}% from the original area</p>
+            <div id="closemlfres">
+                <i class="fa fa-times" id="mlfresclose" aria-hidden="true"></i>
+            </div>
+    </div>
+
+
+      <script>
+        var mlf=document.getElementById("mlf");
+        mlf.addEventListener("click",function(){document.getElementById("mlfres").style.display="block";})
+        var closemlfres=document.getElementById("closemlfres");
+        closemlfres.addEventListener("click",function(){document.getElementById("mlfres").style.display="none";})
+      </script>
+
+</body>
+</html>

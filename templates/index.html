@@ -1,0 +1,164 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/static/css/font-awesome.min.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab:600,700italic' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/static/css/stylesheet.css">
+        
+		<title>
+			Cube-Home page
+		</title>
+        <style>
+
+             #nimg{float:right;width:50%; height:100%; }
+             #nnimg{float:left; width:50%; height:100%;}
+             #sidelogo{ width:auto; height:120px; margin-top:15px; margin-left:15px;}
+        </style>
+
+
+	</head>
+	<body onload="getLocation()">
+            <input type="checkbox" id="menubutton1" />
+            <label for="menubutton1" id="menubuttonnn">
+                <span id="a-menu"></span>
+                <span id="b-menu"></span>
+                <span id="c-menu"></span>
+            </label>
+            
+            <div id="sidebar">
+                <img src="/static/logo.png"id="sidelogo"/>
+                <p id="aboutpara">
+                    In our world there is lots of changes happening to our earth, either it is manmade or by nature, have you ever gazed out the window of a flying airplane and wondered what happened here? what is there? And what would happen through years in here? So we have built a responsive web application, uses real time precise location of the device, send it to the server, and send back the data associated with the location to entertain you with NASA’s way of entertainment (which is information, lots of them) but in another way using data visualization and machine learning.
+                
+                </p>
+            </div>
+        
+        <section id="content">
+        
+            <div id="n">
+                    <img src="{{ first_img }}" id="nimg"/>
+                    <img src="{{ second_img }}" id="nnimg" />
+                <!--<img src="\static\1_Cambodia.jpg" id="nimg"/>-->
+                <!--<img src="/static/2_Cambodia.Png" id="nnimg"/>-->
+            </div>            
+            <div id="p">
+                <section class="section-map">
+                    <iframe src="static/api.html" id="mapid" frameborder="0" style="border:0 "></iframe>
+                </section>
+            </div>
+            <section id="labels">
+                <div id="gnature">nature</div>
+                <div id="gplaces">places</div>
+                <div id="holo">
+                    <img src="/static/logo.png" id="clogo"/>
+                </div>
+            </section>
+
+            <div id="coor">
+                <i class="fa fa-location-arrow" aria-hidden="true"  id="loc"></i>
+                <p id="coorr"></p>            
+            </div>
+
+        </section>
+        <div id="holotap">
+            <div id="closeholotap">
+                <i class="fa fa-times" id="holoclose" aria-hidden="true"></i>
+            </div>
+            <!-- hologram programming prototype -not completed yet-
+            <div>
+                            <img id="a" src="" style="transform:rotate(0deg);
+                                      -ms-transform:rotate(0deg);
+                                      -webkit-transform:rotate(0deg);
+                                      width:auto;
+                                      height:25%;
+                                    position:relative;
+                                    top:40%;">
+                            <img  id="b" src="" style="transform:rotate(90deg);
+                                      -ms-transform:rotate(90deg);
+                                      -webkit-transform:rotate(90deg);
+                                      width:auto;
+                                      height:25%;
+                                      position:relative;">
+                            <img  id="c" src="" style="transform:rotate(180deg);
+                                      -ms-transform:rotate(180deg);
+                                      -webkit-transform:rotate(180deg);
+                                      width:auto;
+                                      height:25%;
+                                    position:relative;
+                                    top:40%;
+                                    right:0;">
+                            <img  id="d" src="" style="transform:rotate(270deg);
+                                      -ms-transform:rotate(270deg);
+                                      -webkit-transform:rotate(270deg);
+                                      width:auto;
+                                      height:25%;
+                                    position:relative;
+                                    bottom:0;
+                                    left:36%;">
+
+            
+            
+            </div>-->
+            <img src="/static/holo.png" id="hologramimage"/>
+        </div>                                        
+                                        <script src="/static/js/jquery-1.11.1.min.js"></script>
+                                		<script src="/static/js/plugin.js"></script>
+                                        <script>
+                                            var l = document.getElementById("coorr");
+
+                                            function getLocation() {
+                                                if (navigator.geolocation) {
+                                                    navigator.geolocation.getCurrentPosition(showPosition);
+                                                } else { 
+                                                    l.innerHTML = "Geolocation is not supported by this browser.";
+                                                }
+                                            }
+
+                                            function showPosition(position) {
+                                                  console.log(position.coords.longitude);
+                                                l.innerHTML=position.coords.longitude;
+                                            }
+                                            window.setInterval(function(){getLocation();},5000);
+
+                                            var holo = document.getElementById("holo");
+                                            var closeholotap=document.getElementById("closeholotap");
+                                            holo.addEventListener("click",function(){
+                                                document.getElementById("holotap").style.display="block";
+                                                
+                                            })
+                                            closeholotap.addEventListener("click",function(){
+                                                document.getElementById("holotap").style.display="none";
+                                                
+                                            })
+                                            var x=document.getElementById("gnature");
+                                            var y=document.getElementById("gplaces");
+                                            x.addEventListener("click",function(){
+                                                document.getElementById("n").style.display="block";
+                                                document.getElementById("p").style.display="none";
+                                            })
+                                            y.addEventListener("click",function(){
+                                                document.getElementById("n").style.display="none";
+                                                document.getElementById("p").style.display="block";                
+                                            })
+                        
+                                            
+                                            //Hologram programming prototype -under developing-
+                                            
+                        // var placesrc="hologramtest.png";
+                        //    var arrimg=     
+                        //[document.getElementById("a"),document.getElementById("b"),document.getElementById("c"),document.getElementById("d")];
+                        //for(j=0;j<4;j++){
+                        //arrimg[j].setAttribute("src",placesrc);}
+        
+                                            
+        </script>
+
+        
+	</body>
+</html>
